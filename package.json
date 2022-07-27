@@ -7,6 +7,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@saeris/apollo-server-vercel": "^1.0.1",
     "apollo-server": "^3.10.0",
     "apollo-server-core": "^3.10.0",
