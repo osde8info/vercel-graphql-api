@@ -26,7 +26,10 @@ const resolvers = {
 }
 
 const apolloServer = new ApolloServer({
-  typeDefs, resolvers
+  typeDefs,
+  resolvers,
+  instrospection: true,
+  playground: true
 });
 
 export const config = {
