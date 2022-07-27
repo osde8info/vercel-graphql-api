@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "micro"
+    "start": "next start"
   },
   "dependencies": {
     "@saeris/apollo-server-vercel": "^1.0.1",
