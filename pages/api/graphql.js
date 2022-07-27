@@ -1,5 +1,8 @@
 import { ApolloServer, gql } from 'apollo-server-micro'
 
+const cors = require('micro-cors')(); // highlight-line
+const { send } = require('micro');
+
 const typeDefs = gql`
   type Query {
     users: [User!]!
