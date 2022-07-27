@@ -7,6 +7,7 @@
     "start": "micro"
   },
   "dependencies": {
+    "@saeris/apollo-server-vercel": "^1.0.1",
     "apollo-server": "^3.10.0",
     "apollo-server-core": "^3.10.0",
     "apollo-server-micro": "3.10.0",
