@@ -1,8 +1,5 @@
-// import { ApolloServer, gql } from 'apollo-server-micro'
-import { ApolloServer } from "apollo-server";
-import {
-  ApolloServerPluginLandingPageGraphQLPlayground
-} from "apollo-server-core";
+import { ApolloServer, gql } from 'apollo-server-micro'
+
 const { router, get, post, options } = require('microrouter');
 
 const cors = require('micro-cors')(); // highlight-line
@@ -32,10 +29,7 @@ const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   instrospection: true,
-  playground: true,
-  plugins: [
-    ApolloServerPluginLandingPageGraphQLPlayground(),
-  ],
+  playground: true
 });
 
 export const config = {
