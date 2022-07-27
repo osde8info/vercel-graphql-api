@@ -1,52 +1,39 @@
-const { router, get, post, options } = require('microrouter');
-const { ApolloServer, gql } = require('apollo-server-micro');
+import { ApolloServer, gql } from 'apollo-server-micro'
 
-// const cors = require('micro-cors')(); // highlight-line
-//
-// const { send } = require('micro');
+const { router, get, post, options } = require('microrouter');
+
+const cors = require('micro-cors')(); // highlight-line
+
+const { send } = require('micro');
 
 const GRAPHQL_ENDPOINT = '/api/graphql';
 
-// const typeDefs = gql`
-//   type Query {
-//     users: [User!]!
-//   }
-//   type User {
-//     name: String
-//   }
-// `
-//
-// const resolvers = {
-//   Query: {
-//     users(parent, args, context) {
-//       return [{ name: 'Nextjs' }]
-//     },
-//   },
-// }
 const typeDefs = gql`
   type Query {
-    sayHello: String
+    users: [User!]!
   }
-`;
+  type User {
+    name: String
+  }
+`
 
 const resolvers = {
   Query: {
-    sayHello(parent, args, context) {
-      return 'Hello World!';
+    users(parent, args, context) {
+      return [{ name: 'Nextjs' }]
     },
   },
-};
+}
 
 const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers
+  typeDefs, resolvers
 });
 
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
-// }
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
 
 module.exports = apolloServer.start().then(() => {
   const handler = apolloServer.createHandler({
