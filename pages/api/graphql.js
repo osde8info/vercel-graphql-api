@@ -1,7 +1,12 @@
 import { ApolloServer, gql } from 'apollo-server-micro'
 
+const { router, get, post, options } = require('microrouter');
+
 const cors = require('micro-cors')(); // highlight-line
+
 const { send } = require('micro');
+
+const GRAPHQL_ENDPOINT = '/api/graphql';
 
 const typeDefs = gql`
   type Query {
@@ -20,7 +25,9 @@ const resolvers = {
   },
 }
 
-const apolloServer = new ApolloServer({ typeDefs, resolvers })
+const apolloServer = new ApolloServer({
+  typeDefs, resolvers
+});
 
 export const config = {
   api: {
@@ -30,7 +37,11 @@ export const config = {
 
 module.exports = apolloServer.start().then(() => {
   const handler = apolloServer.createHandler({
-    path: '/api/graphql'
+    path: GRAPHQL_ENDPOINT
   });
-  return cors((req, res) => req.method === 'OPTIONS' ? send(res, 200, 'ok') : handler(req, res))
+  return router(
+      get('/', (req, res) => 'Welcome!'),
+      post(GRAPHQL_ENDPOINT, handler),
+      get(GRAPHQL_ENDPOINT, handler),
+  );
 });
